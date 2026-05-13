@@ -24,7 +24,25 @@ class MainScene extends Phaser.Scene {
     this.load.image('plant_stage_2', 'assets/sprites/plant_stage_2.png');
     this.load.image('plant_stage_3', 'assets/sprites/plant_stage_3.png');
     TRASH_KEYS.forEach(k => this.load.image(k, `assets/sprites/${k}.png`));
-    this.load.audio('bgm', 'assets/audio/music_summer_harvest.mp3');
+    this.load.audio('bgm', 'assets/audio/florist.mp3');
+
+    // Loading UI
+    const cx = this.cameras.default.width / 2;
+    const cy = this.cameras.default.height / 2;
+    const barW = 360, barH = 22;
+    const bg = this.add.rectangle(cx, cy, barW + 4, barH + 4, 0x222222).setStrokeStyle(2, 0x8fd694);
+    const bar = this.add.rectangle(cx - barW / 2, cy, 0, barH, 0x8fd694).setOrigin(0, 0.5);
+    const label = this.add.text(cx, cy - 36, 'Đang tải...', {
+      fontFamily: 'sans-serif', fontSize: '22px', color: '#fff'
+    }).setOrigin(0.5);
+    const pct = this.add.text(cx, cy + 36, '0%', {
+      fontFamily: 'monospace', fontSize: '16px', color: '#aaa'
+    }).setOrigin(0.5);
+    this.load.on('progress', p => {
+      bar.width = barW * p;
+      pct.setText(`${Math.round(p * 100)}%`);
+    });
+    this.load.on('complete', () => { bg.destroy(); bar.destroy(); label.destroy(); pct.destroy(); });
   }
 
   create() {

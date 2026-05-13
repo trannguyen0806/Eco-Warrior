@@ -44,5 +44,9 @@ web/
 ├── README.md       File này
 └── assets/
     ├── sprites/    Copy từ Assets/Sprites/ + 1 sprite player
-    └── audio/      music_summer_harvest.mp3
+    └── audio/      florist.mp3
 ```
+
+## Credits
+- Nhạc nền `florist.mp3` — *Florist* by **TAD**, [CC0 từ OpenGameArt](https://opengameart.org/content/lofi-compilation). Không bắt buộc credit nhưng để cảm ơn tác giả.
+- Sprite (cây, rác, bình tưới, player) tự vẽ / từ project Unity gốc.
