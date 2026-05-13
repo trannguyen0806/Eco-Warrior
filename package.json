@@ -1,0 +1,45 @@
+{
+  "name": "eco-warrior",
+  "version": "1.0.0",
+  "description": "Eco-Warrior — game 2D giáo dục môi trường (Phaser 3 + Electron)",
+  "main": "electron-main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-packager . Eco-Warrior --platform=win32 --arch=x64 --out=dist --overwrite --ignore=\"^/(dist|node_modules|Assets|Packages|ProjectSettings|Library|Temp|UserSettings|Logs|docs|_Recovery|.git)\"",
+    "build:dir": "electron-builder --win --dir"
+  },
+  "devDependencies": {
+    "@electron/packager": "^20.0.0",
+    "electron": "^31.7.7",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.ecowarrior.desktop",
+    "productName": "Eco-Warrior",
+    "files": [
+      "electron-main.js",
+      "web/**/*",
+      "!web/DEVELOPMENT.md",
+      "!web/README.md"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "Eco-Warrior.exe"
+    },
+    "portable": {
+      "artifactName": "Eco-Warrior.exe"
+    }
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.3.4",
+    "@capacitor/cli": "^8.3.4",
+    "@capacitor/core": "^8.3.4"
+  }
+}

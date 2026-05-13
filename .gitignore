@@ -76,3 +76,30 @@ crashlytics-build.properties
 # OS / editor noise
 .DS_Store
 Thumbs.db
+
+# ============================================================
+# Web / Electron / Capacitor build artifacts
+# ============================================================
+
+# Node
+/node_modules/
+npm-debug.log
+yarn-error.log
+
+# Electron build output
+/dist/
+
+# USB distribution bundle (build artifact, có thể tái tạo bằng `npm run build`)
+/usb-bundle/
+
+# Android (Capacitor) build output — giữ project, bỏ build cache
+/android/.gradle/
+/android/build/
+/android/app/build/
+/android/local.properties
+/android/captures/
+/android/.idea/
+
+# IDE
+.idea/
+.vscode/

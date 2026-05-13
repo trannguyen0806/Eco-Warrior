@@ -161,7 +161,64 @@ Doc gốc: https://phaser.io/docs
 
 ---
 
-## 5. Roadmap đề xuất (nếu muốn phát triển tiếp)
+## 5. Build cho phân phối
+
+Có 3 cách đóng gói game để gửi/nộp:
+
+### 5.1 Web hosting (đơn giản nhất)
+
+Push folder `web/` lên GitHub Pages / Netlify / Vercel → share URL. Người chơi mở browser là chơi.
+
+### 5.2 Desktop app (Electron) — ra folder `.exe`
+
+Chạy từ **root project** (không phải trong `web/`):
+
+```bash
+npm install          # lần đầu, tải ~580MB node_modules
+npm start            # test app trong cửa sổ Electron
+npm run build        # ra dist/Eco-Warrior-win32-x64/
+```
+
+Output: folder `dist/Eco-Warrior-win32-x64/` (~226MB) chứa `Eco-Warrior.exe` + Electron runtime DLLs. **Copy cả folder** vào USB, user double-click `Eco-Warrior.exe` chạy được, không cần cài gì.
+
+> Lưu ý: Phaser phải load local (file `web/phaser.min.js`), không từ CDN. Electron không có internet khi đóng gói.
+
+### 5.3 Android APK (Capacitor)
+
+Yêu cầu: Android Studio đã cài (đi kèm Android SDK + JDK 17/21).
+
+Lần đầu — đã làm:
+```bash
+npm install --save @capacitor/core @capacitor/cli @capacitor/android
+npx cap add android
+# Sửa android/local.properties: sdk.dir=C:/path/to/Sdk
+```
+
+Mỗi lần build APK:
+```bash
+npx cap sync                # đồng bộ web/ → android/
+cd android
+./gradlew assembleDebug     # ra app/build/outputs/apk/debug/app-debug.apk
+```
+
+APK debug ~7.5MB, cài được trên mọi điện thoại Android (cho phép Unknown Sources). Release APK cần signing key — xem [Capacitor docs](https://capacitorjs.com/docs/android/deploying-to-google-play).
+
+### 5.4 Build USB bundle (3 trong 1)
+
+Script chưa tự động — làm thủ công:
+```bash
+mkdir usb-bundle
+cp -r dist/Eco-Warrior-win32-x64 usb-bundle/Windows
+cp android/app/build/outputs/apk/debug/app-debug.apk usb-bundle/Eco-Warrior-Android.apk
+cp -r web usb-bundle/source-code
+# Thêm HƯỚNG_DẪN.txt
+```
+
+Tổng dung lượng ~237MB. Copy `usb-bundle/` lên USB là xong.
+
+---
+
+## 6. Roadmap đề xuất (nếu muốn phát triển tiếp)
 
 **Dễ (1–2h mỗi cái):**
 - [ ] Thêm sound BGM khác nhau theo level
@@ -183,7 +240,7 @@ Doc gốc: https://phaser.io/docs
 
 ---
 
-## 6. Debug & troubleshooting
+## 7. Debug & troubleshooting
 
 | Triệu chứng | Cách check |
 |---|---|
@@ -196,7 +253,7 @@ Doc gốc: https://phaser.io/docs
 
 ---
 
-## 7. Quy ước code
+## 8. Quy ước code
 
 - File entity / class: **PascalCase.js** (`Player.js`, `Plant.js`).
 - File util / system: **camelCase.js** (`sfx.js`, `save.js`).
@@ -207,7 +264,7 @@ Doc gốc: https://phaser.io/docs
 
 ---
 
-## 8. Câu hỏi thường gặp (FAQ)
+## 9. Câu hỏi thường gặp (FAQ)
 
 **Q: Mình không có Python, mở thế nào?**
 A: Cài Node (đã rất phổ biến), chạy `npx serve` trong folder `web/`. Hoặc dùng VS Code Live Server.
