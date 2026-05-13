@@ -1,17 +1,27 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class player : MonoBehaviour
 {
     public float moveSpeed = 5f;
 
-    private  Rigidbody2D  rb;
+    private Rigidbody2D rb;
 
-    public Vector3 moveInput;
+    public Vector2 moveInput;
 
-    private void  Update()
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Update()
     {
         moveInput.x = Input.GetAxis("Horizontal");
         moveInput.y = Input.GetAxis("Vertical");
-        transfrom.position += moveInput * moveSpeed * Time.deltaTime;
-    }   
+    }
+
+    private void FixedUpdate()
+    {
+        rb.linearVelocity = moveInput * moveSpeed;
+    }
 }
