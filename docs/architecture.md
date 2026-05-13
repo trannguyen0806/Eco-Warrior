@@ -10,21 +10,25 @@
 ## Cấu trúc thư mục
 ```
 Eco-Warrior/
-├── Assembly-CSharp.csproj      # Csproj Unity tự sinh
-├── Eco-Warrior.slnx
-├── Packages/manifest.json      # Khai báo package
+├── .gitignore                  # ignore Library/, Temp/, .csproj/.slnx, ...
+├── Packages/manifest.json      # Khai báo package Unity
 ├── ProjectSettings/            # Thiết lập project, version Unity
 ├── Assets/
 │   ├── Scenes/SampleScene.unity        # Scene duy nhất
 │   ├── Settings/                       # URP / scene template / global settings
-│   ├── player/                         # Sprite nhân vật (7 ảnh PNG)
-│   ├── scrip/                          # (đặt tên sai "scrip") — script C#
+│   ├── player/                         # Sprite nhân vật (7 PNG)
+│   ├── Scripts/                        # Script C#
 │   │   └── AudioManager.cs             # Singleton quản lý music + SFX
 │   ├── player.cs                       # Player movement — class `player : MonoBehaviour`
-│   ├── tài nguyên/                     # Sprite vật phẩm (rác, bình tưới, cây, map)
-│   ├── *.mp3                           # Nhạc nền
+│   ├── Sprites/                        # Sprite vật phẩm (rác, bình tưới, cây, map)
+│   │   ├── block_map.jpg
+│   │   ├── plastic_bottle.png / metal_can.png / garbage_can.png
+│   │   ├── trash_bin.png
+│   │   ├── watering_can.png / watering_can_pouring.png
+│   │   └── plant_stage_1.png / plant_stage_2.png / plant_stage_3.png
+│   ├── music_summer_harvest.mp3        # Nhạc nền (Summer Harvest OST)
 │   └── _Recovery/                      # Backup Unity tự sinh
-└── docs/                               # (mới) tài liệu
+└── docs/                               # tài liệu
 ```
 
 > File player MonoBehaviour duy nhất giờ là `Assets/player.cs` — gắn vào GameObject `player` trong scene.
@@ -52,7 +56,7 @@ SampleScene
 | File | Class | Vai trò |
 |---|---|---|
 | `Assets/player.cs` | `player : MonoBehaviour` | Di chuyển nhân vật bằng `Rigidbody2D.linearVelocity` |
-| `Assets/scrip/AudioManager.cs` | `AudioManager : MonoBehaviour` | Singleton quản lý music + SFX (PlaySfx / PlayMusic / StopMusic) |
+| `Assets/Scripts/AudioManager.cs` | `AudioManager : MonoBehaviour` | Singleton quản lý music + SFX (PlaySfx / PlayMusic / StopMusic) |
 
 ### `player.cs` logic
 - `Awake()` lấy `Rigidbody2D` qua `GetComponent`.
@@ -67,8 +71,11 @@ SampleScene
 
 ## Issues đã sửa
 1. ✅ **`Assets/player.cs`** — sửa typo `transfrom` → `transform`, viết lại theo Rigidbody2D + FixedUpdate.
-2. ✅ **`Assets/scrip/AudioManager.cs`** — class đã đổi thành `AudioManager : MonoBehaviour`, có API cơ bản.
+2. ✅ **`Assets/Scripts/AudioManager.cs`** — class đã đổi thành `AudioManager : MonoBehaviour`, có API cơ bản.
 3. ✅ **Xoá stub** `Assets/scrip/player.cs` và `Assets/scrip/NewEmptyCSharpScript.cs` (cùng `.meta`).
+4. ✅ **GUID** trong `Assets/player.cs.meta` đã re-point về đúng giá trị scene yêu cầu (`f8ed0b11...`).
+5. ✅ **Rename tiếng Việt → English**: `Assets/tài nguyên/` → `Assets/Sprites/`, `Assets/scrip/` → `Assets/Scripts/`, các sprite/audio đều đổi tên ASCII (xem cấu trúc thư mục ở trên).
+6. ✅ **.gitignore** chuẩn Unity, untrack `Library/`, `Logs/`, `UserSettings/`, csproj, slnx.
 
 > Sau khi sửa, mở Unity 6000.4.6f1 → Play sẽ chạy được (nhân vật di chuyển theo phím Horizontal/Vertical).
 
