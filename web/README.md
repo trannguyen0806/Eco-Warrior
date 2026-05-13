@@ -23,8 +23,13 @@ Mở `http://localhost:8000`.
 | **Space** | Tưới cây gần nhất (trong bán kính 90px) |
 | **ESC** | Về Menu (đang chơi) |
 
-- Đi đè rác = nhặt (tối đa 5 rác cùng lúc).
-- Đi đè thùng rác = bỏ → **+10đ / rác**.
+**Điều kiện THẮNG (cần CẢ HAI):**
+1. Tưới tất cả cây lên giai đoạn 3 (mỗi cây cần tưới 2 lần).
+2. Nhặt hết rác trên map + bỏ hết vào thùng rác.
+
+**Cơ chế:**
+- Đi đè rác = nhặt (tối đa **5 rác** cùng lúc, mọi level).
+- Đi đè thùng rác (góc dưới trái) = bỏ → **+10đ / rác**.
 - Tưới cây = lên giai đoạn (1→2→3) → **+20đ / lần**.
 - Nhặt 3 rác liên tiếp trong 5 giây = **Combo +10đ bonus**.
 - Level 3 có vũng bùn — đi qua bị chậm 50%.
@@ -41,7 +46,7 @@ Level tiếp theo mở khi hoàn thành level trước.
 
 ## Tech stack
 
-- **Phaser 3** (CDN, không build tool)
+- **Phaser 3** (file local `phaser.min.js` — chạy offline được khi đóng gói Electron)
 - **ES Modules** native (browser hiện đại)
 - **localStorage** lưu best score + unlocked level
 - **Web Audio API** tạo SFX bằng code (không cần file âm thanh)
@@ -60,10 +65,15 @@ web/
 │   ├── systems/         sfx.js, save.js
 │   ├── entities/        Player.js, Plant.js
 │   └── scenes/          PreloadScene, MenuScene, HowToScene, GameScene, GameOverScene
+├── phaser.min.js       Phaser 3 bundle (load local)
 └── assets/
     ├── sprites/         11 PNG (player, plants, trash, bin, ...)
     └── audio/           florist.mp3 (2.6MB, CC0)
 ```
+
+## Đóng gói cho phân phối (Windows .exe + Android APK)
+
+Xem **[DEVELOPMENT.md mục 5](./DEVELOPMENT.md#5-build-cho-phân-phối)** — build Electron `.exe` + Capacitor `.apk` + USB bundle.
 
 Xem **[DEVELOPMENT.md](./DEVELOPMENT.md)** để biết:
 - Thêm level mới (sửa 1 file)

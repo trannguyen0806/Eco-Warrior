@@ -6,7 +6,6 @@ export const GAME = {
   HEIGHT: 540,
   PLAYER_SPEED: 220,
   WATER_RANGE: 90,       // bán kính px để tưới được cây
-  INVENTORY_MAX: 5,      // số rác tối đa cầm trên tay
   COMBO_WINDOW_MS: 5000, // nhặt rác trong khoảng này tính combo
   COMBO_THRESHOLD: 3,    // nhặt đủ N rác liên tiếp → bonus
   COMBO_BONUS: 10,
@@ -33,6 +32,7 @@ export const LEVELS = [
     timeLimit: 90,
     plantCount: 2,
     trashCount: 5,
+    inventoryMax: 5,
     randomSpawn: false,
     mudCount: 0,
   },
@@ -42,6 +42,7 @@ export const LEVELS = [
     timeLimit: 75,
     plantCount: 3,
     trashCount: 8,
+    inventoryMax: 5,
     randomSpawn: true,
     mudCount: 0,
   },
@@ -51,6 +52,7 @@ export const LEVELS = [
     timeLimit: 60,
     plantCount: 4,
     trashCount: 12,
+    inventoryMax: 5,
     randomSpawn: true,
     mudCount: 3,
   },
@@ -75,13 +77,13 @@ export const PLANT_GROWN_FACTS = [
 // Vị trí spawn cố định cho Level 1 (dạy người chơi)
 export const LEVEL1_LAYOUT = {
   player: { x: 480, y: 270 },
-  bin: { x: 80, y: 100 },
+  bin: { x: 70, y: 470 },     // góc dưới bên trái
   plants: [{ x: 700, y: 130 }, { x: 820, y: 380 }],
   trash: [
     { x: 260, y: 220, key: 'plastic_bottle' },
-    { x: 380, y: 410, key: 'metal_can' },
+    { x: 380, y: 380, key: 'metal_can' },
     { x: 560, y: 470, key: 'garbage_can' },
-    { x: 200, y: 320, key: 'plastic_bottle' },
+    { x: 240, y: 100, key: 'plastic_bottle' },
     { x: 620, y: 200, key: 'metal_can' },
   ],
 };

@@ -5,7 +5,7 @@
   "main": "electron-main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-packager . Eco-Warrior --platform=win32 --arch=x64 --out=dist --overwrite --ignore=\"^/(dist|node_modules|Assets|Packages|ProjectSettings|Library|Temp|UserSettings|Logs|docs|_Recovery|.git)\"",
+    "build": "electron-packager . Eco-Warrior --platform=win32 --arch=x64 --out=dist --overwrite --ignore=\"^/(dist|node_modules|Assets|Packages|ProjectSettings|Library|Temp|UserSettings|Logs|docs|_Recovery|android|usb-bundle|capacitor.config.json|ignore.conf|Assembly-CSharp|Eco-Warrior.slnx|\\.git)\"",
     "build:dir": "electron-builder --win --dir"
   },
   "devDependencies": {
